@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "usuario": "admin",
+    "senha": "123",
+    "nivel": "medico"
+  },
+  {
+    "id": 2,
+    "usuario": "rodrigo",
+    "senha": "555",
+    "nivel": "admin"
+  },
+  {
+    "id": 3,
+    "usuario": "rafael",
+    "senha": "321",
+    "nivel": "admin"
+  },
+  {
+    "id": 4,
+    "usuario": "raquelzita",
+    "senha": "",
+    "nivel": "medico"
+  }
+]

@@ -2,21 +2,14 @@ import json
 
 def ler_json(arquivo):
     with open(arquivo, "r") as f:
-        json.load(f)
+        return json.load(f)
 
 def salvar_json(arquivo, dados):
     with open(arquivo, "w") as f:
         json.dump(dados, f, indent=2)
 
-import json
-
-def ler_json(arquivo):
-    with open(arquivo, "r") as f:
-        json.load(f)
-
-def salvar_json(arquivo, dados):
-    with open(arquivo, "w") as f:
-        json.dump(dados, f, indent=2)
+def novo_id(lista):
+    return lista[len(lista)-1]["id"] + 1
 
 def menu_usuarioAdmin():
     
@@ -59,3 +52,18 @@ def menu_consultas():
     print(" 6 - Listar todas as consultas do dia ")
     print(" 7 - Listar consultas futuras ")
 
+def id_existe(lista):
+    id = int(input("iD do usuario: "))
+
+    encontrado = False
+    for i in lista:
+        if i["id"] == id:
+            encontrado = True
+            break
+    
+    if not encontrado:
+        print("Usuario nao encontrado!")
+        return
+    
+    else:
+        return encontrado
