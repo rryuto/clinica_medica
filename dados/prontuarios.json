@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "id_paciente": 1,
+    "id_medico": 1,
+    "data": "24/04/2026",
+    "diagnostico": "Gripe",
+    "receita": "Paracetamol",
+    "observacoes": "Repouso"
+  }
+]
