@@ -1,10 +1,22 @@
 import json
-import admin
 import funcoes as f
 
-f.ler_json("usuarios.json")
-
 print("Bem Vindo\n")
-usuario = input("Usuario: ")
-senha = input("Senha: ")
+#verificacao de login
+while True:
+    
+    usuario = input("Usuario: ")
+    senha = input("Senha: ")
+    nivel = f.login(usuario, senha)
 
+    if nivel == "admin":
+        import admin
+        break
+    elif nivel == "recepcionista":
+        import recepcionista
+        break
+    elif nivel == "medico":
+        import medico
+        break
+    else:
+        print("Usuario nao cadastrado, tente denovo.\n")

@@ -3,28 +3,10 @@ import funcoes as f
 
 usuarios = f.ler_json("usuarios.json")
 medicos = f.ler_json("medicos.json")
-
-def retorna_nivel():
-    escolha = False
-    while escolha == False:
-        print("Qual o nivel do usuario?")
-        print("1. para Administrador")
-        print("2. para Recepcionista")
-        print("3. para Medico")
-        nivel = int(input())
-        if nivel == 1:
-            nivel = "admin"
-            escolha = True
-        elif nivel == 2:
-            nivel = "recepcionista"
-            escolha = True
-        elif nivel == 3:
-            nivel = "medico"
-            escolha = True
-        else:
-            print(f"Escolha nao compativel, escolha entre 1-3")
-    
-    return nivel
+pacientes = f.ler_json("pacientes.json")
+consultas = f.ler_json("consultas.json")
+relatorios = f.ler_json("relatorios.json")
+# USUARIOS ===========================================================================================================
 
 #cadastrar usuarios
 def cadastro_usuario():
@@ -48,7 +30,7 @@ def listar_usuarios():
         print("Nenhum usuario cadastrado")
     else:
         for dic in usuarios:
-            print(f"iD: {dic["id"]} - Usuario: {dic["usuario"]} - Nivel: {dic["nivel"]}")
+            print(f"iD: {dic['id']} - Usuario: {dic['usuario']} - Nivel: {dic['nivel']}")
         print("\n")
 
 #excluir usuarios
@@ -135,7 +117,7 @@ def resetar_senha():
     f.salvar_json("usuarios.json", usuarios)
 
 
-#MEDICOS
+#MEDICOS ===========================================================================================================
 
 #cadastrar medicos
 def cadastrar_medico():
@@ -172,11 +154,7 @@ def excluir_medico():
     if op == 1:
         nome = input("Qual medico deseja excluir? ")
         encontrado = False
-        for i in medicos:
-            if i["nome"].lower() == nome.lower():
-                medicos.remove(i)
-                encontrado = True
-                break
+        f.excluir_por_nome(medicos, nome)
 
         if encontrado:
             f.salvar_json("medicos.json", medicos)
@@ -277,8 +255,18 @@ def menu_usuarios():
     elif op == '5':
         listar_usuarios()
 
-#PACIENTES
+#PACIENTES ===========================================================================================================
 
+def visualizar_pacientes():
+    if not pacientes:
+        print("Nenhum paciente cadastrado.")
+    else:
+        for dic in pacientes:
+            print(f"iD: {dic['id']} - Nome: {dic['nome']} - Idade: {dic['idade']} - CPF: {dic['cpf']} - Telefone: {dic['telefone']} - Endereco: {dic['endereco']}")
+        print("\n")
+
+def buscar_paciente():
+#MAIN ADMIN ===========================================================================================================
 def main_admin():
     print("-- ADMIN --")
     print("1. Usuarios")
@@ -292,6 +280,5 @@ def main_admin():
         menu_usuarios()
     elif op == '2':
         menu_medicos()
-
 
 main_admin()
