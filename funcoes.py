@@ -1,12 +1,12 @@
 import json
 
 def ler_json(arquivo):
-    with open(arquivo, "r") as f:
+    with open(arquivo, "r", encoding="utf-8") as f:
         return json.load(f)
 
 def salvar_json(arquivo, dados):
-    with open(arquivo, "w") as f:
-        json.dump(dados, f, indent=2)
+    with open(arquivo, "w", encoding="utf-8") as f:
+        json.dump(dados, f, indent=2, ensure_ascii=False)
 
 def novo_id(lista):
     return lista[len(lista)-1]["id"] + 1

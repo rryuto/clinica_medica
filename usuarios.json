@@ -22,5 +22,17 @@
     "usuario": "raquelzita",
     "senha": "",
     "nivel": "medico"
+  },
+  {
+    "id": 5,
+    "usuario": "menino",
+    "senha": "2222",
+    "nivel": "recepcionista"
+  },
+  {
+    "id": 6,
+    "usuario": "qqq",
+    "senha": "qqqq",
+    "nivel": "admin"
   }
 ]
