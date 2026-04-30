@@ -5,7 +5,7 @@ usuarios = f.ler_json("usuarios.json")
 medicos = f.ler_json("medicos.json")
 pacientes = f.ler_json("pacientes.json")
 consultas = f.ler_json("consultas.json")
-relatorios = f.ler_json("relatorios.json")
+
 # USUARIOS ===========================================================================================================
 
 #cadastrar usuarios
@@ -266,6 +266,48 @@ def visualizar_pacientes():
         print("\n")
 
 def buscar_paciente():
+    print("Qual paciente deseja buscar?")
+    nome = input()
+    for i in pacientes:
+        if i["nome"].lower() == nome.lower():
+            print(i)
+            break
+    else:
+        print("Paciente nao encontrado.")
+
+def historico_completo():
+    if not consultas:
+        print("Nenhuma consulta realizada.")
+    else:
+        for dic in consultas:
+            print(f"iD: {dic['id']} - Paciente: {dic['paciente']} - Medico: {dic['medico']} - Data: {dic['data']} - Hora: {dic['hora']}")
+        print("\n")
+
+def menu_pacientes():
+    print("-- PACIENTES --")
+    print("1. Visualizar todos os pacientes")
+    print("2. Buscar pacientes")
+    print("3. Ver histórico completo")
+    op = input()
+    
+    if op == '1':
+        visualizar_pacientes()
+    elif op == '2':
+        buscar_paciente()
+    elif op == '3':
+        historico_completo()
+
+#CONSULTAS ===========================================================================================================
+
+def visualizar_consultas():
+    if not consultas:
+        print("Nenhuma consulta realizada.")
+    else:
+        for dic in consultas:
+            print(f"iD: {dic['id']} - Paciente: {dic['paciente']} - Medico: {dic['medico']} - Data: {dic['data']} - Hora: {dic['hora']}")
+        print("\n")
+
+
 #MAIN ADMIN ===========================================================================================================
 def main_admin():
     print("-- ADMIN --")
@@ -280,5 +322,11 @@ def main_admin():
         menu_usuarios()
     elif op == '2':
         menu_medicos()
+    elif op == '3':
+        menu_pacientes()
+    elif op == '4':
+        menu_consultas()
+    elif op == '5':
+        menu_relatorios()
 
 main_admin()

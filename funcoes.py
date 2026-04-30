@@ -14,47 +14,6 @@ def novo_id(lista):
     else:
         return lista[len(lista)-1]["id"] + 1
 
-def menu_usuarioAdmin():
-    
-    print(" 1 - Cadastrar usuários do sistema ")
-    print(" 2 - Editar usuários ")
-    print(" 3 - Excluir usuários ")
-    print(" 4 - Resetar senha de usuários ")
-    print(" 5 - Listar todos os usuários ")
-
-def menu_medicosAdmin():
-    print(" 1 - Cadastrar médicos ")
-    print(" 2 - Editar médicos ")
-    print(" 3 - Excluir médicos cadastrados ")
-    print(" 4 - Listar médicos cadastrados ")
-
-def menu_pacientesAdmin():
-    print(" 1 - Visualizar todos os pacientes ")
-    print(" 2 - Buscar pacientes ")
-    print(" 3 - Ver histórico completo ")
-
-def menu_consultasAdmin():
-    print(" 1 - Visualizar todas as consultas ")
-    print(" 2 - Consultar agenda geral ")
-
-def menu_relatoriosAdmin():
-    print(" 1 - Total de consultas realizadas por período ")
-    print(" 2 - Total de consultas canceladas ")
-    print(" 3 - Quantidade de pacientes ")
-    print(" 4 - Quantidade de médicos ativos ")
-    print(" 5 - Consultas por médico ")
-    print(" 6 - Atendimentos realizados no dia ")
-    print(" 7 - Pacientes mais atendidos")
-
-def menu_consultas():
-    print(" 1 - Marcar consulta para médico específico ")
-    print(" 2 - Escolher data e horário ")
-    print(" 3 - Reagendar consulta ")
-    print(" 4 - Cancelar consulta ")
-    print(" 5 - Confirmar presença do paciente ")
-    print(" 6 - Listar todas as consultas do dia ")
-    print(" 7 - Listar consultas futuras ")
-
 def id_existe(lista):
     id = int(input("iD do usuario: "))
 
@@ -125,3 +84,21 @@ def excluir_por_usuario(lista, usuario):
         if i["usuario"].lower() == usuario.lower():
             lista.remove(i)
             return True
+
+def id_paciente(lista, nome):
+    for i in lista:
+        if i["nome"].lower() == nome.lower():
+            return i["id"]
+    return None
+
+def procurar_medico(lista, nome):
+    for i in lista:
+        if i["nome"].lower() == nome.lower():
+            return i
+    return None
+
+def listar_medicos():
+    medicos = f.ler_json("medicos.json")
+    for i in medicos:
+        print(f"iD: {i['id']} - Nome: {i['nome']} - Especialidade: {i['especialidade']} - CRM: {i['crm']}")
+    print("\n")
