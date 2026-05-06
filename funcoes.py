@@ -40,7 +40,7 @@ def login(usuario, senha):
 
 def buscar_id(lista, id):
     for i in lista:
-        if buscar_id(lista, id) == id:
+        if i["id"] == id:
             return i
     return None
 
@@ -98,7 +98,16 @@ def procurar_medico(lista, nome):
     return None
 
 def listar_medicos():
-    medicos = f.ler_json("medicos.json")
+    medicos = ler_json("medicos.json")
     for i in medicos:
         print(f"iD: {i['id']} - Nome: {i['nome']} - Especialidade: {i['especialidade']} - CRM: {i['crm']}")
     print("\n")
+
+def validar_disponibilidade(lista, idmedico, hora, data):
+    disponivel = True
+    for i in lista:
+        if i["status"] != "Cancelada":
+            if idmedico == i["id_medico"] and data == i["data"] and hora == i["hora"]:
+                disponivel = False
+        
+    return disponivel

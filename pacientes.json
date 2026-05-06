@@ -6,5 +6,13 @@
     "cpf": "00000000000",
     "telefone": "67999999999",
     "endereco": "Rua A, 123"
+  },
+  {
+    "id": 2,
+    "nome": "Rodrigo Yamauchi",
+    "idade": 22,
+    "cpf": "01230120312912",
+    "telefone": "679999999",
+    "endereco": "rua 29 de maio 12312321"
   }
 ]

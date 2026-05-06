@@ -307,6 +307,24 @@ def visualizar_consultas():
             print(f"iD: {dic['id']} - Paciente: {dic['paciente']} - Medico: {dic['medico']} - Data: {dic['data']} - Hora: {dic['hora']}")
         print("\n")
 
+def visualizar_consultas_medico():
+    print("Qual medico deseja visualizar as consultas?")
+    id_medico = int(input("iD do medico: "))
+    for i in consultas:
+        if i["id_medico"] == id_medico:
+            print(i)
+            break
+
+def menu_consultas():
+    print("-- CONSULTAS --")
+    print("1. Visualizar todas as consultas")
+    print("2. Visualizar consultas de um medico")
+    op = input()
+    
+    if op == '1':
+        visualizar_consultas()
+    elif op == '2':
+        visualizar_consultas_medico()
 
 #MAIN ADMIN ===========================================================================================================
 def main_admin():
