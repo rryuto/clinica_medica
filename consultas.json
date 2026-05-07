@@ -3,23 +3,23 @@
     "id": 1,
     "id_paciente": 1,
     "id_medico": 1,
-    "data": "03/06/2026",
+    "data": "03/04/2026",
     "hora": "17:17",
-    "status": "Confirmada"
+    "status": "Finalizada"
   },
   {
     "id": 2,
     "id_paciente": 1,
     "id_medico": 3,
-    "data": "29/04/2026",
+    "data": "29/06/2026",
     "hora": "23:14",
-    "status": "Agendada"
+    "status": "Finalizada"
   },
   {
     "id": 3,
     "id_paciente": 2,
     "id_medico": 3,
-    "data": "03/05/2026",
+    "data": "03/07/2026",
     "hora": "17:55",
     "status": "Confirmada"
   },
