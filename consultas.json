@@ -13,7 +13,7 @@
     "id_medico": 3,
     "data": "29/04/2026",
     "hora": "23:14",
-    "status": "Cancelada"
+    "status": "Agendada"
   },
   {
     "id": 3,
@@ -22,5 +22,21 @@
     "data": "03/05/2026",
     "hora": "17:55",
     "status": "Confirmada"
+  },
+  {
+    "id": 4,
+    "id_paciente": 1,
+    "id_medico": 2,
+    "data": "09/10/2026",
+    "hora": "12",
+    "status": "Cancelada"
+  },
+  {
+    "id": 5,
+    "id_paciente": 1,
+    "id_medico": 2,
+    "data": "04/09/2026",
+    "hora": "11 30",
+    "status": "Cancelada"
   }
 ]

@@ -202,3 +202,29 @@ def consultas_hoje():
     if not existe:
         print("Nao ha consultas hoje.")
 
+def Menu_Consultas_recepcionista():
+    print("================ CONSULTAS =================")
+    print(" 1 - Marcar consulta para médico específico ")
+    print(" 2 - Reagendar consulta ")
+    print(" 3 - Cancelar Consulta ")
+    print(" 4 - Confirmar presença do paciente ")
+    print(" 5 - Listar todas as consultas ")
+    print(" 6 - Listar consultas futuras ")
+    print("==============================================")
+
+
+
+
+while True:
+    Menu_Consultas_recepcionista()
+    opção = int(input("Digite uma dessas opção: "))
+    if opção == 1:
+        marcar_consulta()
+    elif opção == 2:
+        reagendar_consulta()
+    elif opção == 3:
+        cancelar_consulta()
+    elif opção == 4:
+        confirmar_consulta()
+    elif opção == 5:
+        consultas_hoje()
