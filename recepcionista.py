@@ -1,6 +1,7 @@
 import json
+from tkinter import Y
 import funcoes as f
-from datetime import date
+from datetime import date, datetime
 
 pacientes = f.ler_json("pacientes.json")
 consultas = f.ler_json("consultas.json")
@@ -201,4 +202,76 @@ def consultas_hoje():
             existe = True
     if not existe:
         print("Nao ha consultas hoje.")
+
+#consultas futuras
+
+def consultas_futuras():
+    hoje = date.today()
+    existe = False
+
+    for i in consultas:
+        data_consulta = datetime.strptime(i["data"], "%d/%m/%Y").date() #converte a data para o formato date
+        if data_consulta > hoje:
+            print(f"ID: {i['id']} - ID do paciente: {i['id_paciente']} "
+                  f"- ID do medico: {i['id_medico']} - Data: {i['data']} - Hora: {i['hora']}")
+            existe = True
+
+    if not existe:
+        print("Nao ha consultas futuras.")
+
+#historico
+
+#•	Visualizar consultas anteriores do paciente 
+def consultas_anteriores_paciente():
+    nome_paciente = input("Nome do paciente: ")
+    id_paciente = f.id_paciente(pacientes, nome_paciente)
+    existe = False
+    if id_paciente:
+        for i in consultas:
+            if i["id_paciente"] == id_paciente and i["status"] == "Finalizada":
+                    print(f"""
+        Consultas Finalizadas
+        ---------
+        ID da consulta: {i['id']}
+        Paciente ID:    {i['id_paciente']}
+        Médico ID:      {i['id_medico']}
+        Data:           {i['data']}
+        Hora:           {i['hora']}
+        Status:         {i['status']}
+        """)
+                    existe = True
+        if not existe:
+            print(f"Consultas passadas inexistente.")
+    else:
+        print(f"Paciente nao encontrado.")
+
+#Relatorios
+
+#agenda do dia
+#nao e a mesma coisa que consultas do dia?
+
+#consultas por data
+
+def consultas_por_data():
+    data = input("Data a consultar no formato(DD/MM/AAAA)\n")
+    existe = False
+
+    for i in consultas:
+        if i["data"] == data:
+            print(f"""
+            Consultas 
+            ---------
+            ID da consulta: {i['id']}
+            Paciente ID:    {i['id_paciente']}
+            Médico ID:      {i['id_medico']}
+            Data:           {i['data']}
+            Hora:           {i['hora']}
+            Status:         {i['status']}
+            """)
+            existe = True
+        
+    if not existe:
+            print(f"Nao ha consultas para esta data.")
+
+
 
