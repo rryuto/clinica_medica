@@ -6,6 +6,7 @@ from datetime import date
 pacientes = f.ler_json("pacientes.json")
 consultas = f.ler_json("consultas.json")
 medicos = f.ler_json("medicos.json")
+prontuarios = f.ler_json("prontuarios.json")
 
 #Agenda
 def Listar_consultas_para_medico_especifico():
@@ -37,6 +38,7 @@ def Visualizar_agenda_futura():
         for i in consultas:
             if datetime.strptime(i["data"], "%d/%m/%Y").timestamp() > hoje.timestamp():
                 print(i)
+
 
 #Atendimento
 def Iniciar_Atendimento():
@@ -75,7 +77,37 @@ def Finalizar_Atendimento():
     else:
         print("Voce não esta cadastrado.")    
 
-Finalizar_Atendimento()
-#Prontuário/Laudo
+def Menu_Agenda_Medico():
+    print(" 1 - Listar apenas consultas marcadas para ele ")
+    print(" 2 - Visualizar agenda diária ")
+    print(" 3 - Visualizar agenda futura ")
 
-    
+def Atendimento():
+    print(" 1 - Iniciar atendimento ")
+    print(" 2 - Finalizar atendimento ")
+
+
+#Prontuário/Laudo
+def Laudo_Medico():
+    doutor = input("Qual o nome do médico que deseja fazer o Laudo Médico? ")
+    id = f.id_paciente(medicos, doutor)
+    if id:
+        for i in consultas:
+            if i["status"] == "Em Atendimento":
+                nome_paciente = input("Qual o nome do paciente que necessita de um Laudo? ")
+                data = str(input("Quando o voce deseja fazer a consulta do Laudo? Use como exemplo esse: DD/MM/AAAA "))
+                medico_responsavel = input("Qual médico será resposável por fazer o Laudo? ")
+                Diagnostico = input("Qual o diagnóstico final do paciente? ")
+                receita = input("Qual a receita médica á ser passado? ")
+                observacoes = input("Quais são as observações que devem ser passadas ao paciente? ")
+                dic = {"id" : f.novo_id(prontuarios)
+                        ,"id_paciente" : f.id_paciente(pacientes,nome_paciente)
+                        , "id_medico" :f.id_paciente(medicos, medico_responsavel)
+                        , "data" : data
+                        , "diagnostico" : Diagnostico
+                        , "receita" : receita
+                        , "observacoes" : observacoes}
+                prontuarios.append(dic)
+        f.salvar_json("prontuarios.json", prontuarios)
+    else:
+        print("Você não é um médico cadastrado.")

@@ -7,5 +7,14 @@
     "diagnostico": "Gripe",
     "receita": "Paracetamol",
     "observacoes": "Repouso"
+  },
+  {
+    "id": 2,
+    "id_paciente": 1,
+    "id_medico": 2,
+    "data": "29/09/2026",
+    "diagnostico": "Cancer",
+    "receita": "benegripe",
+    "observacoes": "Repouso imediato"
   }
 ]
