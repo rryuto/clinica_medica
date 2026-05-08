@@ -307,18 +307,76 @@ def visualizar_consultas():
             print(f"iD: {dic['id']} - Paciente: {dic['paciente']} - Medico: {dic['medico']} - Data: {dic['data']} - Hora: {dic['hora']}")
         print("\n")
 
+def visualizar_consultas_medico():
+    print("Qual medico deseja visualizar as consultas?")
+    id_medico = int(input("iD do medico: "))
+    for i in consultas:
+        if i["id_medico"] == id_medico:
+            print(i)
+            break
+
 def menu_consultas():
     print("-- CONSULTAS --")
     print("1. Visualizar todas as consultas")
-    print("2. Consultar agenda de um medico")
+    print("2. Visualizar consultas de um medico")
     op = input()
     
     if op == '1':
         visualizar_consultas()
     elif op == '2':
-        consultar_agenda_medico()
+        visualizar_consultas_medico()
 
-#RELATORIOS ===========================================================================================================
+#RELATÓRIOS ===========================================================================================================
+
+def menu_relatorios():
+    print("-- RELATÓRIOS --")
+    print("1. Total de consultas realizadas por período")
+    print("2. Total de consultas canceladas")
+    print("3. Quantidade de pacientes cadastrados")
+    print("4. Quantidade de médicos ativos")
+    print("5. Consultas por médico")
+    print("6. Atendimentos realizados no dia")
+    print("7. Pacientes mais atendidos")
+    op = input()
+    
+    if op == '1':
+        totalconsultasperiodo()
+    
+    elif op == '2':
+        totalconsultascanceladas()
+
+    elif op == '3':
+        quantidadepacientescadastrados()
+    
+    elif op == '4':
+        quantidademedicosativos()
+
+    elif op == '5':
+        consultaspormedico()
+
+    elif op == '6':
+        atendimentosrealizadosnodia()
+    
+    elif op == '7':
+        pacientesmaisatendidos()
+
+
+def totalconsultasperiodo():
+
+def totalconsultascanceladas():
+
+def quantidadepacientescadastrados():
+
+def quantidademedicosativos():
+
+def consultaspormedico():
+
+def atendimentosrealizadosnodia():
+
+def pacientesmaisatendidos():
+
+
+
 
 #MAIN ADMIN ===========================================================================================================
 def main_admin():
