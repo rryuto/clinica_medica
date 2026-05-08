@@ -328,6 +328,49 @@ def menu_consultas():
 
 #RELATÓRIOS ===========================================================================================================
 
+
+from datetime import datetime
+def totalconsultasperiodo():
+    matutino = 0
+    vespertino = 0
+    noturno = 0
+    for dic in consultas:
+        if dic['status'] == "Confirmada":
+            periodo = datetime.strptime(dic['hora'], "%H:%M")
+            hora = periodo.hour
+            if hora < 12:
+                matutino += 1
+            elif hora < 18:
+                vespertino +=1
+            else:
+                noturno +=1
+    print("Matutino:", matutino)
+    print("Vespertino:", vespertino)
+    print("Noturno:", noturno)
+
+
+def totalconsultascanceladas():
+    canceladas = 0
+    for dic in consultas:
+        if dic['status'] == "Cancelada":
+            canceladas +=1
+            print("Canceladas:", canceladas)
+    if canceladas == 0:
+        print("Nenhuma consulta cancelada.")
+
+def quantidadepacientescadastrados():
+    f.ler_json("pacientes.json")
+    print("Pacientes cadastrados:", len(pacientes))
+def quantidademedicosativos():
+    f.ler_json("medicos.json")
+    print("Medicos ativos:", len(medicos))
+def consultaspormedico():
+    f.ler_json("consultas.json")
+    
+def atendimentosrealizadosnodia():
+    print()
+def pacientesmaisatendidos():
+    print()
 def menu_relatorios():
     print("-- RELATÓRIOS --")
     print("1. Total de consultas realizadas por período")
@@ -338,7 +381,7 @@ def menu_relatorios():
     print("6. Atendimentos realizados no dia")
     print("7. Pacientes mais atendidos")
     op = input()
-    
+       
     if op == '1':
         totalconsultasperiodo()
     
@@ -359,22 +402,6 @@ def menu_relatorios():
     
     elif op == '7':
         pacientesmaisatendidos()
-
-
-def totalconsultasperiodo():
-
-def totalconsultascanceladas():
-
-def quantidadepacientescadastrados():
-
-def quantidademedicosativos():
-
-def consultaspormedico():
-
-def atendimentosrealizadosnodia():
-
-def pacientesmaisatendidos():
-
 
 
 
