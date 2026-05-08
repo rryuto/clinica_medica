@@ -38,3 +38,8 @@ def Visualizar_agenda_futura():
             if datetime.strptime(i["data"], "%d/%m/%Y").timestamp() > hoje.timestamp():
                 print(i)
 
+#Atendimento
+def Iniciar_Atendimento():
+    for i in consultas:
+        if i["status"] == "Confirmada":
+            i["status"] = "Em atendimento"
