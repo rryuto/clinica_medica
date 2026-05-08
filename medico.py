@@ -40,6 +40,42 @@ def Visualizar_agenda_futura():
 
 #Atendimento
 def Iniciar_Atendimento():
-    for i in consultas:
-        if i["status"] == "Confirmada":
-            i["status"] = "Em atendimento"
+    consulta_especifica = input("Qual o nome do paciente que você deseja iniciar o atendimento? ")
+    id = f.id_paciente(pacientes, consulta_especifica)
+    if id:
+        iniciar = input("Você quer iniciar o atendimento?(Responda sim ou não) ")
+        if iniciar == "sim":
+            for i in consultas:
+                if i["status"] == "Confirmada":
+                    i["status"] = "Em Atendimento"
+                    print("Você iniciou o atendimento.")
+        elif iniciar == "não":
+            print("Tranquilo então.")
+        else:
+            print("Essã opção não existe, digite sim ou não.")
+        f.salvar_json("consultas.json", consultas)
+    else:
+        print("Você não esta cadastrado.")
+
+def Finalizar_Atendimento():
+    consulta_especifica = input("Qual o nome do paciente que você deseja finalizar o atendimento? ")
+    id = f.id_paciente(pacientes, consulta_especifica)
+    if id:
+        finalizar = input("Você quer finalizar o atendimento?(Responda sim ou não) ")
+        if finalizar == "sim":
+            for i in consultas:
+                if i["status"] == "Em Atendimento":
+                    i["status"] == "Finalizada"
+                    print("Você finalizou o atendimento.")
+        elif finalizar == "não":
+            print("Tranquilo então.") 
+        else:
+            print("Essã opção não existe, digite sim ou não.")   
+        f.salvar_json("consultas.json", consultas) 
+    else:
+        print("Voce não esta cadastrado.")    
+
+Finalizar_Atendimento()
+#Prontuário/Laudo
+
+    
