@@ -3,36 +3,42 @@
     "id": 1,
     "usuario": "admin",
     "senha": "123",
-    "nivel": "medico"
+    "nivel": "admin"
   },
   {
     "id": 2,
-    "usuario": "rodrigo",
-    "senha": "555",
-    "nivel": "admin"
+    "usuario": "recep",
+    "senha": "123",
+    "nivel": "recepcionista"
   },
   {
     "id": 3,
-    "usuario": "rafael",
-    "senha": "321",
-    "nivel": "admin"
+    "usuario": "med1",
+    "senha": "123",
+    "nivel": "medico"
   },
   {
     "id": 4,
-    "usuario": "raquelzita",
-    "senha": "777",
+    "usuario": "med2",
+    "senha": "123",
     "nivel": "medico"
   },
   {
     "id": 5,
-    "usuario": "menino",
-    "senha": "2222",
-    "nivel": "recepcionista"
+    "usuario": "med3",
+    "senha": "123",
+    "nivel": "medico"
   },
   {
     "id": 6,
-    "usuario": "qqq",
-    "senha": "qqqq",
+    "usuario": "med4",
+    "senha": "123",
+    "nivel": "medico"
+  },
+  {
+    "id": 7,
+    "usuario": "admin2",
+    "senha": "123",
     "nivel": "admin"
   }
 ]

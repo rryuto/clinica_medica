@@ -331,23 +331,29 @@ def menu_consultas():
 
 from datetime import datetime
 def totalconsultasperiodo():
-    matutino = 0
-    vespertino = 0
-    noturno = 0
+    data_inicio = input("Data de inicio no formato(DD/MM/AAAA):")
+    data_inicio = f.converter_data(data_inicio)
+    data_fim = input("Data de fim no formato(DD/MM/AAAA):")
+    data_fim = f.converter_data(data_fim)
+    existe = False
     for dic in consultas:
-        if dic['status'] == "Confirmada":
-            periodo = datetime.strptime(dic['hora'], "%H:%M")
-            hora = periodo.hour
-            if hora < 12:
-                matutino += 1
-            elif hora < 18:
-                vespertino +=1
-            else:
-                noturno +=1
-    print("Matutino:", matutino)
-    print("Vespertino:", vespertino)
-    print("Noturno:", noturno)
-
+        if dic['status'] == "Finalizada":
+            data_consulta = f.converter_data(dic["data"])
+            if data_inicio <= data_consulta <= data_fim:
+                print(f"""
+                Consultas 
+                ---------
+                ID da consulta: {dic['id']}
+                Paciente ID:    {dic['id_paciente']}
+                Médico ID:      {dic['id_medico']}
+                Data:           {dic['data']}
+                Hora:           {dic['hora']}
+                Status:         {dic['status']}
+                """)
+                existe = True                        
+        
+    if not existe:
+            print(f"Nao ha consultas realizadas no periodo.")
 
 def totalconsultascanceladas():
     canceladas = 0
