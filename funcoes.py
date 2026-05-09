@@ -1,4 +1,5 @@
 import json
+from datetime import date, datetime
 
 def ler_json(arquivo):
     with open(arquivo, "r", encoding="utf-8") as f:
@@ -111,3 +112,6 @@ def validar_disponibilidade(lista, idmedico, hora, data):
                 disponivel = False
         
     return disponivel
+
+def converter_data(data):
+    return datetime.strptime(data, "%d/%m/%Y").date()

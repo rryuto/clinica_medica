@@ -1,10 +1,9 @@
-import json
-from tkinter import Y
 import funcoes as f
 from datetime import date, datetime
 
 pacientes = f.ler_json("pacientes.json")
 consultas = f.ler_json("consultas.json")
+medicos = f.ler_json("medicos.json")
 
 #PACIENTES ===========================================================================================================
 
@@ -16,57 +15,56 @@ def cadastro_paciente():
     end = str(input("Informe seu endereço de residência: "))
     dic = {"id": f.novo_id(pacientes),
            "nome": paciente,
-             "idade":idade,
-             "cpf": cpf,
-             "telefone": telefone,
-             "endereco": end}
+            "idade":idade,
+            "cpf": cpf,
+            "telefone": telefone,
+            "endereco": end}
     pacientes.append(dic)
     f.salvar_json("pacientes.json", pacientes)
     
 def editar_paciente():
     print("Qual paciente deseja editar: ")
     id = int(input("iD do Usuário: "))
-    for i in pacientes:
-        if i["id"] == id:
-            print(i)
-            break
+    if id:
+        print("Qual informação deseja editar: ")
+        print(" 1 - Nome ")
+        print(" 2 - Idade ")
+        print(" 3 - CPF ") 
+        print(" 4 - Telefone ")
+        print(" 5 - Endereço ") 
+        op = int(input("Escolha uma dessas opções: "))
+        if op == 1:
+            n_nome = input("Digite o novo nome: ")
+            for i in pacientes:
+                if i["id"] == id:
+                    i["nome"] = n_nome
+        elif op == 2:
+            nova_idade = input("Me informe a sua idade: ")
+            for i in pacientes:
+                if i["id"] == id:
+                    i["idade"] = nova_idade
+        elif op == 3:
+            novo_cpf = str(input("Digite seu novo CPF: "))
+            for i in pacientes:
+                if i["id"] == id:
+                    i["cpf"] = novo_cpf
+        elif op == 4:
+            novo_telefone = str(input("Digite seu novo número de contato: "))
+            for i in pacientes:
+                if i["id"] == id:
+                    i["telefone"] = novo_telefone
+        elif op == 5:
+            novo_end = str(input("Digite seu novo endereço: "))
+            for i in pacientes:
+                if i["id"] == id:
+                    i["endereco"] = novo_end
         else:
-            print("Esse paciente não está cadastrado!")
-    print("Qual informação deseja editar: ")
-    print(" 1 - Nome ")
-    print(" 2 - Idade ")
-    print(" 3 - CPF ") 
-    print(" 4 - Telefone ")
-    print(" 5 - Endereço ") 
-    op = int(input("Escolha uma dessas opções: "))
-    if op == 1:
-        n_nome = input("Digite o novo nome: ")
-        for i in pacientes:
-            if i["id"] == id:
-                i["nome"] = n_nome
-    elif op == 2:
-        nova_idade = input("Me informe a sua idade: ")
-        for i in pacientes:
-            if i["id"] == id:
-                i["idade"] = nova_idade
-    elif op == 3:
-        novo_cpf = str(input("Digite seu novo CPF: "))
-        for i in pacientes:
-            if i["id"] == id:
-                i["cpf"] = novo_cpf
-    elif op == 4:
-        novo_telefone = str(input("Digite seu novo número de contato: "))
-        for i in pacientes:
-            if i["id"] == id:
-                i["telefone"] = novo_telefone
-    elif op == 5:
-        novo_end = str(input("Digite seu novo endereço: "))
-        for i in pacientes:
-            if i["id"] == id:
-                i["endereco"] = novo_end
+            print("Opção inválida.")
+        f.salvar_json("pacientes.json", pacientes)
     else:
-        print("Essa opção não existe, escolha as opções de 1 á 5!!")
-    f.salvar_json("pacientes.json", pacientes)
+        print("Paciente não encontrado")
+
+   
 
 def buscar_paciente_especifico():
     paciente = input("Digite o nome do paciente que você deseja buscar: ")
@@ -77,56 +75,60 @@ def buscar_paciente_especifico():
             break
     else:
         print("Paciente não encontrado.")
-    f.salvar_json("pacientes.json", pacientes)
+
 
 def listar_pacientes():
     for i, valor in enumerate(pacientes):
-        print(f"{valor["id"]} --- {valor["nome"]}")   
+        print(f"{valor['id']} --- {valor['nome']}")   
 
 def Visuzlizar_dados_completos():
     print("Qual paciente deseja ver os dados?")
-    id_paciente = input("iD do paciente: ")
-    for i in pacientes:
-        if i["id"] == id_paciente:
-            print(f"ID: {i["id"]}")
-            print(f"Nome: {i["nome"]}")
-            print(f"CPF: {i["cpf"]}")
-            print(f"Telefone: {i["telefone"]}")
-            print(f"Endereco: {i["endereco"]}")
-            break
+    id_paciente = int(input("iD do paciente: "))
+    if f.buscar_id(pacientes, id_paciente):
+        for i in pacientes:
+            if i["id"] == id_paciente:
+                print(f"ID: {i['id']}")
+                print(f"Nome: {i['nome']}")
+                print(f"CPF: {i['cpf']}")
+                print(f"Telefone: {i['telefone']}")
+                print(f"Endereco: {i['endereco']}")
+                break
     else:
         print(f"Paciente nao encontrado.")
     
 
-def Menu_recepcionista_pacientes():
-    print("========== PACIENTES ===========")
-    print(" 1 - Cadastrar paciente ")
-    print(" 2 - Editar paciente ")
-    print(" 3 - Buscar paciente específico ")
-    print(" 4 - Listar todos os pacientes ")
-    print(" 5 - Visualizar dados completos ")
-    print("================================")
-    opção = int(input("Digite uma dessas opção: "))
+def menu_pacientes():
+    while True:
+        print("========== PACIENTES ===========")
+        print(" 1 - Cadastrar paciente")
+        print(" 2 - Editar paciente")
+        print(" 3 - Buscar paciente específico")
+        print(" 4 - Listar todos os pacientes")
+        print(" 5 - Visualizar dados completos")
+        print(" 0 - Voltar")
+        opção = int(input("Digite uma opção: "))
+        if opção == 0:
+            break
+        elif opção == 1:
+            cadastro_paciente()
+        elif opção == 2:
+            editar_paciente()
+        elif opção == 3:
+            buscar_paciente_especifico()
+        elif opção == 4:
+            listar_pacientes()
+        elif opção == 5:
+            Visuzlizar_dados_completos()
+        else:
+            print("Opção inválida.")
 
-    if opção == 1:
-        cadastro_paciente()
-    elif opção == 2:
-        editar_paciente()
-    elif opção == 3:
-        buscar_paciente_especifico()
-    elif opção == 4:
-        listar_pacientes()
-    elif opção == 5:
-        Visuzlizar_dados_completos()
-    else:
-        print("Essa opção não existe, digite de 1 á 5!!")
 #CONSULTAS ===========================================================================================================
 
 #marcar consulta
 def marcar_consulta():
     nome_paciente = input("Nome do paciente: ")
     id_paciente = f.id_paciente(pacientes, nome_paciente)
-    print(f.listar_medicos())
+    f.listar_medicos()
     id_medico = int(input("Escolha um medico pelo iD: "))
     data = input("Data: ")
     hora = input("Hora: ")
@@ -187,8 +189,9 @@ def confirmar_consulta():
     id = int(input("Qual consulta deseja confirmar?"))
     if f.buscar_id(consultas, id):
         for i in consultas:
-            if i["status"] == "Agendada":
+            if i["id"] == id and i["status"] == "Agendada":
                 i["status"] = "Confirmada"
+                f.salvar_json("consultas.json", consultas)
                 break
     else:
         print("Consulta nao existe no sistema.")
@@ -203,47 +206,53 @@ def consultas_hoje():
     if not existe:
         print("Nao ha consultas hoje.")
 
-def Menu_Consultas_recepcionista():
-    print("================ CONSULTAS =================")
-    print(" 1 - Marcar consulta para médico específico ")
-    print(" 2 - Reagendar consulta ")
-    print(" 3 - Cancelar Consulta ")
-    print(" 4 - Confirmar presença do paciente ")
-    print(" 5 - Listar todas as consultas ")
-    print(" 6 - Listar consultas futuras ")
-    print("==============================================")
-
-
-
-
-while True:
-    Menu_Consultas_recepcionista()
-    opção = int(input("Digite uma dessas opção: "))
-    if opção == 1:
-        marcar_consulta()
-    elif opção == 2:
-        reagendar_consulta()
-    elif opção == 3:
-        cancelar_consulta()
-    elif opção == 4:
-        confirmar_consulta()
-    elif opção == 5:
-        consultas_hoje()
-#consultas futuras
-
 def consultas_futuras():
     hoje = date.today()
     existe = False
-
     for i in consultas:
-        data_consulta = datetime.strptime(i["data"], "%d/%m/%Y").date() #converte a data para o formato date
-        if data_consulta > hoje:
-            print(f"ID: {i['id']} - ID do paciente: {i['id_paciente']} "
-                  f"- ID do medico: {i['id_medico']} - Data: {i['data']} - Hora: {i['hora']}")
+        data_consulta = datetime.strptime(i["data"], "%d/%m/%Y").date()
+        if data_consulta > hoje and i["status"] == "Agendada":
+            print(f"""
+            Consultas 
+            ---------
+            ID da consulta: {i['id']}
+            Paciente ID:    {i['id_paciente']}
+            Médico ID:      {i['id_medico']}
+            Data:           {i['data']}
+            Hora:           {i['hora']}
+            Status:         {i['status']}
+            """)
             existe = True
-
     if not existe:
         print("Nao ha consultas futuras.")
+
+def menu_consultas():
+    while True:
+        print("========== CONSULTAS ===========")
+        print(" 1 - Marcar consulta (médico, data e horário)")
+        print(" 2 - Reagendar consulta")
+        print(" 3 - Cancelar consulta")
+        print(" 4 - Confirmar presença do paciente")
+        print(" 5 - Listar consultas do dia")
+        print(" 6 - Listar consultas futuras")
+        print(" 0 - Voltar")
+        op = int(input("Opção: "))
+        if op == 0:
+            break
+        elif op == 1:
+            marcar_consulta()
+        elif op == 2:
+            reagendar_consulta()
+        elif op == 3:
+            cancelar_consulta()
+        elif op == 4:
+            confirmar_consulta()
+        elif op == 5:
+            consultas_hoje()
+        elif op == 6:
+            consultas_futuras()
+        else:
+            print("Opção inválida.")
 
 #historico
 
@@ -270,6 +279,19 @@ def consultas_anteriores_paciente():
             print(f"Consultas passadas inexistente.")
     else:
         print(f"Paciente nao encontrado.")
+
+def menu_historico():
+    while True:
+        print("========== HISTÓRICO ===========")
+        print(" 1 - Consultas anteriores do paciente")
+        print(" 0 - Voltar")
+        op = int(input("Opção: "))
+        if op == 0:
+            break
+        elif op == 1:
+            consultas_anteriores_paciente()
+        else:
+            print("Opção inválida.")
 
 #Relatorios
 
@@ -299,5 +321,116 @@ def consultas_por_data():
     if not existe:
             print(f"Nao ha consultas para esta data.")
 
+#consultas canceladas no periodo
 
+def consultas_canceladas_no_periodo():
+    data_inicio = input("Data de inicio no formato(DD/MM/AAAA):")
+    data_inicio = f.converter_data(data_inicio)
+    data_fim = input("Data de fim no formato(DD/MM/AAAA):")
+    data_fim = f.converter_data(data_fim)
+    existe = False
+    for i in consultas:
+        if i["status"] == "Cancelada":
+            data_consulta = f.converter_data(i["data"])
+            if data_inicio <= data_consulta <= data_fim:
+                print(f"""
+            Consultas 
+            ---------
+            ID da consulta: {i['id']}
+            Paciente ID:    {i['id_paciente']}
+            Médico ID:      {i['id_medico']}
+            Data:           {i['data']}
+            Hora:           {i['hora']}
+            Status:         {i['status']}
+            """)
+                existe = True
+        
+    if not existe:
+            print(f"Nao ha consultas neste periodo.")
+
+def pacientes_atendidos_no_dia():
+    hoje = date.today()
+    existe = False
+    for i in consultas:
+        data_consulta = f.converter_data(i["data"])
+        if data_consulta == hoje and i["status"] == "Finalizada":
+            print(f"""
+                Consultas 
+                ---------
+                ID da consulta: {i['id']}
+                Paciente ID:    {i['id_paciente']}
+                Médico ID:      {i['id_medico']}
+                Data:           {i['data']}
+                Hora:           {i['hora']}
+                Status:         {i['status']}
+                """)
+            existe = True                        
+        
+    if not existe:
+            print(f"Nao ha pacientes atendidos no dia.")
+
+def menu_relatorios():
+    while True:
+        print("========== RELATÓRIOS ===========")
+        print(" 1 - Agenda do dia")
+        print(" 2 - Consultas por data")
+        print(" 3 - Consultas canceladas no período")
+        print(" 4 - Pacientes atendidos no dia")
+        print(" 0 - Voltar")
+        op = int(input("Opção: "))
+        if op == 0:
+            break
+        elif op == 1:
+            consultas_hoje()
+        elif op == 2:
+            consultas_por_data()
+        elif op == 3:
+            consultas_canceladas_no_periodo()
+        elif op == 4:
+            pacientes_atendidos_no_dia()
+        else:
+            print("Opção inválida.")
+
+#MAIN
+
+def consultas_status(status):
+    hoje = date.today()
+    n = 0
+    for i in consultas:
+        data_consulta = f.converter_data(i["data"])
+        if data_consulta == hoje and i["status"] == status:
+            n += 1
+    return n
+
+def menu_principal():
+    while True:
+        print("\n========== MENU PRINCIPAL ===========")
+        print(" 1 - Pacientes")
+        print(" 2 - Consultas")
+        print(" 3 - Histórico")
+        print(" 4 - Relatórios")
+        print(" 0 - Sair")
+        op = int(input("Opção: "))
+        if op == 0:
+            print("Até logo.")
+            break
+        elif op == 1:
+            menu_pacientes()
+        elif op == 2:
+            menu_consultas()
+        elif op == 3:
+            menu_historico()
+        elif op == 4:
+            menu_relatorios()
+        else:
+            print("Opção inválida.")
+
+print("=====RECEPCIONISTA=====")
+print(f"Consultas hoje: {consultas_status("Agendada")}")
+print(f"Pacientes cadastrado: {len(pacientes)}")
+print(f"Médicos ativos: {len(medicos)}")
+print(f"Atendimentos finalizados hoje: {consultas_status("Finalizada")}")
+print(f"Consultas canceladas hoje: {consultas_status("Cancelada")}")
+
+menu_principal()
 
