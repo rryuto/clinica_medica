@@ -1,5 +1,6 @@
 import json
 import funcoes as f
+from datetime import datetime, date
 
 usuarios = f.ler_json("usuarios.json")
 medicos = f.ler_json("medicos.json")
@@ -328,8 +329,6 @@ def menu_consultas():
 
 #RELATÓRIOS ===========================================================================================================
 
-
-from datetime import datetime
 def totalconsultasperiodo():
     data_inicio = input("Data de inicio no formato(DD/MM/AAAA):")
     data_inicio = f.converter_data(data_inicio)
@@ -365,16 +364,51 @@ def totalconsultascanceladas():
         print("Nenhuma consulta cancelada.")
 
 def quantidadepacientescadastrados():
-    f.ler_json("pacientes.json")
     print("Pacientes cadastrados:", len(pacientes))
 def quantidademedicosativos():
-    f.ler_json("medicos.json")
     print("Medicos ativos:", len(medicos))
 def consultaspormedico():
-    f.ler_json("consultas.json")
-    
+    for dic in medicos:
+        existe = False
+        print(f"Consulta por medico: {dic['nome']}")
+        for dicc in consultas:
+            if dic['id'] == dicc['id_medico']:
+                print(f"""
+                ---------
+                ID da consulta: {dicc['id']}
+                Paciente ID:    {dicc['id_paciente']}
+                Médico ID:      {dicc['id_medico']}
+                Data:           {dicc['data']}
+                Hora:           {dicc['hora']}
+                Status:         {dicc['status']}
+                """)
+                existe = True
+        if not existe: 
+            print(f"""
+                ---------
+                
+                Não há consultas para esse médico.
+                """)
 def atendimentosrealizadosnodia():
-    print()
+    hoje = date.today()
+    existe = False
+    for dic in consultas:
+        atendimentosdia = f.converter_data(dic["data"])
+        if atendimentosdia == hoje and dic["status"] == "Finalizada":
+            print(f"""
+                Consultas 
+                ---------
+                ID da consulta: {dic['id']}
+                Paciente ID:    {dic['id_paciente']}
+                Médico ID:      {dic['id_medico']}
+                Data:           {dic['data']}
+                Hora:           {dic['hora']}
+                Status:         {dic['status']}
+                """)
+            existe = True                        
+        
+    if not existe:
+            print(f"Não há atendimentos realizados no dia.")
 def pacientesmaisatendidos():
     print()
 def menu_relatorios():
