@@ -1,4 +1,5 @@
 import json
+from admin import main_admin
 import funcoes as f
 
 print("Bem Vindo\n")
@@ -11,6 +12,7 @@ while True:
 
     if nivel == "admin":
         import admin
+        main_admin(usuario)
         break
     elif nivel == "recepcionista":
         import recepcionista

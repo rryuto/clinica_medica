@@ -130,25 +130,27 @@ def marcar_consulta():
     id_paciente = f.id_paciente(pacientes, nome_paciente)
     f.listar_medicos()
     id_medico = int(input("Escolha um medico pelo iD: "))
-    data = input("Data: ")
-    hora = input("Hora: ")
+    data = input("Data(DD/MM/AAAA): ")
+    hora = input("Hora(HH:MM): ")
+    if f.validar_data(data, hora):
+        if f.validar_disponibilidade(consultas, id_medico, hora, data):
+            if f.medico_existe(id_medico) and id_paciente:
+                nova_consulta = {"id": f.novo_id(consultas),
+                                "id_paciente": id_paciente,
+                                "id_medico": id_medico,
+                                "data": data,
+                                "hora": hora,
+                                "status": "Agendada"}
 
-    if f.validar_disponibilidade(consultas, id_medico, hora, data):
-        if id_medico and id_paciente:
-            nova_consulta = {"id": f.novo_id(consultas),
-                            "id_paciente": id_paciente,
-                            "id_medico": id_medico,
-                            "data": data,
-                            "hora": hora,
-                            "status": "Agendada"}
-
-            consultas.append(nova_consulta)
-            f.salvar_json("consultas.json", consultas)
-            print("Consulta agendada com sucesso.")
+                consultas.append(nova_consulta)
+                f.salvar_json("consultas.json", consultas)
+                print("Consulta agendada com sucesso.")
+            else:
+                print("Medico ou paciente nao encontrado.")
         else:
-            print("Medico ou paciente nao encontrado.")
+            print("Horario nao disponivel.")
     else:
-        print("Horario nao disponivel.")
+        print("Por favor insira uma data futura.")
 
 def reagendar_consulta():
     print("Qual consulta deseja reagendar: ")

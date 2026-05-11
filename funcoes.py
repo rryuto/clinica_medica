@@ -115,3 +115,18 @@ def validar_disponibilidade(lista, idmedico, hora, data):
 
 def converter_data(data):
     return datetime.strptime(data, "%d/%m/%Y").date()
+
+def validar_data(data_str, hora_str):
+    data_informado = datetime.strptime(f"{data_str} {hora_str}", "%d/%m/%Y %H:%M")
+    
+    if data_informado >= datetime.now():
+        return True
+    else:
+        return False
+
+def medico_existe(id):
+    for i in medicos:
+        if i["id"] == id:
+            return True
+            break
+    return None
