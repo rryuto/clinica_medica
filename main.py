@@ -1,5 +1,7 @@
 import json
-from admin import main_admin
+import admin
+import recepcionista
+import medico
 import funcoes as f
 
 print("Bem Vindo\n")
@@ -11,14 +13,13 @@ while True:
     nivel = f.login(usuario, senha)
 
     if nivel == "admin":
-        import admin
         main_admin(usuario)
         break
     elif nivel == "recepcionista":
-        import recepcionista
+        main_recepcionista()
         break
     elif nivel == "medico":
-        import medico
+        main_medico()
         break
     else:
         print("Usuario nao cadastrado, tente denovo.\n")
