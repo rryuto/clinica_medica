@@ -150,13 +150,5 @@
     "data": "10/05/2026",
     "hora": "22:32",
     "status": "Agendada"
-  },
-  {
-    "id": 20,
-    "id_paciente": 1,
-    "id_medico": 1,
-    "data": "27/04/2026",
-    "hora": "8:00",
-    "status": "Agendada"
   }
 ]
