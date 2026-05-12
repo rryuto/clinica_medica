@@ -37,7 +37,7 @@ def Visualizar_agenda_futura():
     if id:
         for i in consultas:
             if datetime.strptime(i["data"], "%d/%m/%Y").timestamp() > hoje.timestamp():
-                print(i)
+                print(f"{i}")
 
 
 #Atendimento
@@ -111,3 +111,86 @@ def Laudo_Medico():
         f.salvar_json("prontuarios.json", prontuarios)
     else:
         print("Você não é um médico cadastrado.")
+
+#Histórico Médico
+def buscar_paciente_por_nome():
+    doutor = input("Qual o nome do doutor que está procurando o paciente? ")
+    id = f.id_paciente(medicos, doutor)
+    if id:
+        paciente = input("Qual o nome do paciente que você deseja saber as informações?")
+        for i in pacientes:
+            if i["nome"] == paciente:
+                print(f"{i}")
+                break
+            else:
+                print("Esse paciente não existe.")
+                break
+    else:
+        print("Você não está cadastrado.")
+
+def Ver_historico_de_consultas_anteriores():
+    doutor = input("Qual o nome do médico que deseja ver o histórico dos pacientes? ")
+    id = f.id_paciente(medicos, doutor)
+    if id:
+        paciente = input("Qual o nome do paciente que você deseja saber sobre o histórico de consultas? ")
+        for i in pacientes:
+            if i["nome"] == paciente:
+                for x in consultas:
+                    id = f.id_paciente(pacientes,paciente)
+                    if id == x["id_paciente"]:
+                        print(f" iD: {x["id"]} - iD do paciente: {x["id_paciente"]} - iD do médico: {x["id_medico"]} - Data da consulta: {x["data"]} - Hora da consulta: {x["hora"]} - status da consulta: {x["status"]} ")
+    else:
+        print("Você não está cadastrado.")
+
+def ver_prontuarios_anteriores_do_paciente():
+    doutor = input("Qual o nome do médico que deseja ver o histórico dos prontuários do pacientes? ")
+    id = f.id_paciente(medicos, doutor)
+    if id:
+        paciente = input("Qual o nome do paciente que você deseja saber sobre o histórico de seus prontuários? ")
+        for i in pacientes:
+            if i["nome"] == paciente:
+                for x in prontuarios:
+                    id = f.id_paciente(pacientes,paciente)
+                    if id == x["id_paciente"]:
+                        print(f"iD: {x["id"]} - iD do paciente: {x["id_paciente"]} - Data: {x["data"]} - Dignóstico final: {x["diagnostico"]} - Receita: {x["receita"]} - Observções para o paciente: {x["observacoes"]}")
+    else:
+        print("Você não está cadastrado.")
+
+#Relatórios
+def Total_de_atendimentos():
+    doutor = input("Qual o nome do médico que deseja saber sobre seus atendimentos? ")
+    id = f.id_paciente(medicos, doutor)
+    if id:
+        for i in consultas:
+            if i["id_medico"] == id and i["status"] == "Finalizada":
+                print(f"""
+        Consulta feitas por você
+        ---------
+        ID da consulta: {i['id']}
+        Paciente ID:    {i['id_paciente']}
+        Médico ID:      {i['id_medico']}
+        Data:           {i['data']}
+        Hora:           {i['hora']}
+        Status:         {i['status']}
+        """)
+    else:
+        print("Você não está cadastrado.")
+
+def quantidade_de_consultas_pendentes():
+    doutor = input("Qual o nome do médico que deseja saber sobre suas consultas pendentes? ")
+    id = f.id_paciente(medicos, doutor)
+    if id:
+        for i in consultas:
+            if i["id_medico"] == id and i["status"] == "Agendada" or i["status"] == "Confirmada":
+                print(f"""
+        Consultas Pendentes
+        ---------
+        ID da consulta: {i['id']}
+        Paciente ID:    {i['id_paciente']}
+        Médico ID:      {i['id_medico']}
+        Data:           {i['data']}
+        Hora:           {i['hora']}
+        Status:         {i['status']}
+        """)
+    else:
+        print("Você não está cadastrado.")
