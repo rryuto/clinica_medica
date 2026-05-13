@@ -361,16 +361,28 @@ def totalconsultascanceladas():
 def quantidadepacientescadastrados():
     f.ler_json("pacientes.json")
     print("Pacientes cadastrados:", len(pacientes))
+
 def quantidademedicosativos():
     f.ler_json("medicos.json")
     print("Medicos ativos:", len(medicos))
+
 def consultaspormedico():
-    f.ler_json("consultas.json")
+    doutor = input("Qual o nome do médico que deseja ver suas consultas? ")
+    id = f.id_paciente(medicos, doutor)
+    if id:
+        for i in consultas:
+            if id == i["id_medico"] and i["status"] == "Confirmada" or i["status"] == "Agendada":
+                print(f"iD: {i["id"]} - iD do paciente: {i["id_medico"]} - Data: {i["data"]} - Hora da consulta: {i["hora"]} - Status da consulta: {i["status"]}")
+    else:
+        print("Esse médico não está cadastrado.")
     
 def atendimentosrealizadosnodia():
     print()
+
 def pacientesmaisatendidos():
     print()
+
+
 def menu_relatorios():
     print("-- RELATÓRIOS --")
     print("1. Total de consultas realizadas por período")
