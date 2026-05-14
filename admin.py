@@ -371,8 +371,9 @@ def consultaspormedico():
     id = f.id_paciente(medicos, doutor)
     if id:
         for i in consultas:
-            if id == i["id_medico"] and i["status"] == "Confirmada" or i["status"] == "Agendada":
-                print(f"iD: {i["id"]} - iD do paciente: {i["id_medico"]} - Data: {i["data"]} - Hora da consulta: {i["hora"]} - Status da consulta: {i["status"]}")
+            if id == i["id_medico"]:
+                if i["status"] == "Agendada" or i["status"] == "Confirmada":
+                    print(f"iD: {i["id"]} - iD do paciente: {i["id_paciente"]} - iD do médico: {i["id_medico"]} - Data: {i["data"]} - Hora da consulta: {i["hora"]} - Status da consulta: {i["status"]}")
     else:
         print("Esse médico não está cadastrado.")
     

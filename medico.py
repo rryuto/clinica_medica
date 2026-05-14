@@ -194,3 +194,5 @@ def quantidade_de_consultas_pendentes():
         """)
     else:
         print("Você não está cadastrado.")
+
+
