@@ -427,12 +427,12 @@ def menu_principal():
         else:
             print("Opção inválida.")
 
-print("=====RECEPCIONISTA=====")
-print(f"Consultas hoje: {consultas_status("Agendada")}")
-print(f"Pacientes cadastrado: {len(pacientes)}")
-print(f"Médicos ativos: {len(medicos)}")
-print(f"Atendimentos finalizados hoje: {consultas_status("Finalizada")}")
-print(f"Consultas canceladas hoje: {consultas_status("Cancelada")}")
+# print("=====RECEPCIONISTA=====")
+# print(f"Consultas hoje: {consultas_status("Agendada")}")
+# print(f"Pacientes cadastrado: {len(pacientes)}")
+# print(f"Médicos ativos: {len(medicos)}")
+# print(f"Atendimentos finalizados hoje: {consultas_status("Finalizada")}")
+# print(f"Consultas canceladas hoje: {consultas_status("Cancelada")}")
 
-menu_principal()
+# menu_principal()
 
