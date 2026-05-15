@@ -3,7 +3,7 @@
     "id": 1,
     "id_paciente": 1,
     "id_medico": 1,
-    "data": "24/04/2026",
+    "data": "27/04/2026",
     "diagnostico": "Gripe",
     "receita": "Paracetamol",
     "observacoes": "Repouso"
@@ -11,10 +11,37 @@
   {
     "id": 2,
     "id_paciente": 1,
+    "id_medico": 3,
+    "data": "30/04/2026",
+    "diagnostico": "Rinite alérgica",
+    "receita": "Loratadina",
+    "observacoes": "Evitar poeira e cheiros fortes"
+  },
+  {
+    "id": 3,
+    "id_paciente": 4,
+    "id_medico": 4,
+    "data": "03/05/2026",
+    "diagnostico": "Cólica e irregularidade menstrual",
+    "receita": "Ibuprofeno se dor",
+    "observacoes": "Solicitado ultrassom; retorno em 30 dias"
+  },
+  {
+    "id": 4,
+    "id_paciente": 2,
     "id_medico": 2,
-    "data": "29/09/2026",
-    "diagnostico": "Cancer",
-    "receita": "benegripe",
-    "observacoes": "Repouso imediato"
+    "data": "09/05/2026",
+    "diagnostico": "Dor lombar",
+    "receita": "Dipirona e alongamentos",
+    "observacoes": "Orientado repouso relativo; reavaliação se persistir"
+  },
+  {
+    "id": 5,
+    "id_paciente": 3,
+    "id_medico": 3,
+    "data": "08/05/2026",
+    "diagnostico": "Cefaleia tensional",
+    "receita": "Paracetamol se necessário",
+    "observacoes": "Orientado higiene do sono e hidratação"
   }
 ]
