@@ -457,3 +457,4 @@ def main_admin(usuario):
         menu_consultas()
     elif op == '5':
         menu_relatorios()
+
