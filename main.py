@@ -13,10 +13,11 @@ while True:
     nivel = f.login(usuario, senha)
 
     if nivel == "admin":
-        main_admin(usuario)
+        admin.main_admin(usuario)
         break
     elif nivel == "recepcionista":
-        main_recepcionista()
+        recepcionista.recepcionista_open()
+        recepcionista.menu_principal()
         break
     elif nivel == "medico":
         main_medico()
