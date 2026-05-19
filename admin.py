@@ -20,7 +20,8 @@ def cadastro_usuario():
                     "nivel" : nivel}
 
     usuarios.append(novo_usuario)
-
+    if nivel == "medico":
+        cadastrar_medico(novo_usuario["id"])
     f.salvar_json("usuarios.json", usuarios)
     print("Usuario cadastrado com sucesso.")
 
@@ -120,12 +121,12 @@ def resetar_senha():
 #MEDICOS ===========================================================================================================
 
 #cadastrar medicos
-def cadastrar_medico():
+def cadastrar_medico(id):
     nome = input(f"Nome: ")
     especialidade = input(f"Especialidade: ")
     crm = input(f"CRM: ")
 
-    novo_medico = {"id": f.novo_id(medicos),
+    novo_medico = {"id": id,
                     "nome": nome,
                     "especialidade": especialidade,
                     "crm": crm}
@@ -226,7 +227,7 @@ def menu_medicos():
     op = input()
 
     if op == '1':
-        cadastrar_medico()
+        cadastro_usuario()
     elif op == '2':
         editar_medico()
     elif op == '3':

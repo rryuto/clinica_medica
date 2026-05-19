@@ -1,6 +1,10 @@
 import json
 from datetime import date, datetime
-
+import funcoes as f
+usuarios = f.ler_json("usuarios.json")
+medicos = f.ler_json("medicos.json")
+pacientes = f.ler_json("pacientes.json")
+consultas = f.ler_json("consultas.json")
 def ler_json(arquivo):
     with open(arquivo, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -130,3 +134,10 @@ def medico_existe(id):
             return True
             break
     return None
+
+def retorna_id_medico(usuario):
+    for i in usuarios:
+        if i["usuario"] == usuario:
+            return i["id"]
+
+retorna_id_medico("med5")

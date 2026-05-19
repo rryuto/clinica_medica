@@ -1,26 +1,32 @@
 [
   {
-    "id": 1,
+    "id": 3,
     "nome": "Dr. João Silva",
     "especialidade": "Clínico Geral",
     "crm": "12345"
   },
   {
-    "id": 2,
+    "id": 4,
     "nome": "Dra. Ana Souza",
     "especialidade": "Ortopedia",
     "crm": "23456"
   },
   {
-    "id": 3,
+    "id": 5,
     "nome": "Dr. Rodrigo Pereira",
     "especialidade": "Clínico Geral",
     "crm": "34567"
   },
   {
-    "id": 4,
+    "id": 6,
     "nome": "Dra. Marina Lopes",
     "especialidade": "Ginecologia",
     "crm": "45678"
+  },
+  {
+    "id": 8,
+    "nome": "Dr. Rafael Gonzaels",
+    "especialidade": "Quiroprata",
+    "crm": "666666"
   }
 ]

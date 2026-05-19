@@ -7,7 +7,7 @@ pacientes = f.ler_json("pacientes.json")
 consultas = f.ler_json("consultas.json")
 medicos = f.ler_json("medicos.json")
 prontuarios = f.ler_json("prontuarios.json")
-
+usuarios = f.ler_json("usuarios.json")
 #Agenda
 def Listar_consultas_para_medico_especifico():
     medico = input("Digite o seu nome Doutor: ")
@@ -194,5 +194,4 @@ def quantidade_de_consultas_pendentes():
         """)
     else:
         print("Você não está cadastrado.")
-
-
+    

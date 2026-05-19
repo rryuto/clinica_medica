@@ -40,5 +40,11 @@
     "usuario": "admin2",
     "senha": "123",
     "nivel": "admin"
+  },
+  {
+    "id": 8,
+    "usuario": "med5",
+    "senha": "123",
+    "nivel": "medico"
   }
 ]
