@@ -1,5 +1,6 @@
 import json
 import funcoes as f
+from datetime import date, datetime
 
 usuarios = f.ler_json("usuarios.json")
 medicos = f.ler_json("medicos.json")
@@ -384,24 +385,46 @@ def consultaspormedico():
         print("Esse médico não está cadastrado.")
     
 def atendimentosrealizadosnodia():
-    print()
+    dia = input("Data de pesquisa no formato (DD/MM/AAAA):")
+    existe = False
+    for dic in consultas:
+        if dic['data'] == dia and dic['status'] == "Finalizada":
+            print(f"""
+                Consulta 
+                ---------
+                ID da consulta: {dic['id']}
+                Paciente ID:    {dic['id_paciente']}
+                Médico ID:      {dic['id_medico']}
+                Data:           {dic['data']}
+                Hora:           {dic['hora']}
+                Status:         {dic['status']}
+                """)
+            existe = True                        
+        
+    if not existe:
+            print(f"Não há consultas realizadas nesse dia.")
+            
+
+    
 
 def pacientesmaisatendidos():
-    print()
+    contagem = {}
+    for dic in consultas:
 
+        if dic['status'] == "Finalizada":
 
-    ranking = []
-    for dic in pacientes:
-        i = 0
-        for dicc in consultas:
-            if dic['id'] == dicc['id_paciente'] and dicc['status'] == "Finalizada":
-                i += 1
-        informacoes = {"nome" : dic["nome"], "atendimentos" : i}
-        ranking.append(informacoes)
-    ranking.sort(key=lambda x: -x["atendimentos"])
+            id_paciente = dic['id_paciente']
+
+            if id_paciente in contagem:
+                contagem[id_paciente] += 1
+            else:
+                contagem[id_paciente] = 1
+
+    id_mais = max(contagem, key=contagem.get)
+
+    print(f"ID mais atendido: {id_mais}. Quantidade: {contagem[id_mais]}")
     
-    print(ranking)
- 
+
 def menu_relatorios():
     print("-- RELATÓRIOS --")
     print("1. Total de consultas realizadas por período")
