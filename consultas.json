@@ -27,7 +27,7 @@
     "id": 4,
     "id_paciente": 1,
     "id_medico": 3,
-    "data": "30/04/2026",
+    "data": "18/05/2026",
     "hora": "10:15",
     "status": "Finalizada"
   },
@@ -51,9 +51,9 @@
     "id": 7,
     "id_paciente": 2,
     "id_medico": 3,
-    "data": "08/05/2026",
-    "hora": "13:00",
-    "status": "Finalizada"
+    "data": "18/05/2026",
+    "hora": "20:00",
+    "status": "Confirmada"
   },
   {
     "id": 8,
