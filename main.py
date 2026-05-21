@@ -20,7 +20,8 @@ while True:
         recepcionista.menu_principal()
         break
     elif nivel == "medico":
-        medico.main_medico(usuario)
+        medico.open_medico(usuario)
+        medico.menu_principal(usuario)
         break
     else:
         print("Usuario nao cadastrado, tente denovo.\n")
