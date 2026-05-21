@@ -2,7 +2,7 @@
   {
     "id": 1,
     "id_paciente": 1,
-    "id_medico": 1,
+    "id_medico": 3,
     "data": "27/04/2026",
     "diagnostico": "Gripe",
     "receita": "Paracetamol",
@@ -11,7 +11,7 @@
   {
     "id": 2,
     "id_paciente": 1,
-    "id_medico": 3,
+    "id_medico": 5,
     "data": "30/04/2026",
     "diagnostico": "Rinite alérgica",
     "receita": "Loratadina",
@@ -20,7 +20,7 @@
   {
     "id": 3,
     "id_paciente": 4,
-    "id_medico": 4,
+    "id_medico": 6,
     "data": "03/05/2026",
     "diagnostico": "Cólica e irregularidade menstrual",
     "receita": "Ibuprofeno se dor",
@@ -29,7 +29,7 @@
   {
     "id": 4,
     "id_paciente": 2,
-    "id_medico": 2,
+    "id_medico": 4,
     "data": "09/05/2026",
     "diagnostico": "Dor lombar",
     "receita": "Dipirona e alongamentos",
@@ -38,7 +38,7 @@
   {
     "id": 5,
     "id_paciente": 3,
-    "id_medico": 3,
+    "id_medico": 5,
     "data": "08/05/2026",
     "diagnostico": "Cefaleia tensional",
     "receita": "Paracetamol se necessário",

@@ -10,16 +10,29 @@ prontuarios = f.ler_json("prontuarios.json")
 
 #Agenda
 def Listar_consultas_para_medico_especifico(usuario):
-    id_medico = main_medico(usuario)
+    id_medico = f.retorna_id_medico(usuario)
+    existe = False
     if id_medico:
         for i in consultas:
-            if i["id_medico"].lower() == id_medico.lower() and (i["status"] == "Agendada" or i["status"] == "Confirmada"):
-                print(f"Essas são as consultas marcadas para você {i}")
-    else:
-        print(f"Esse médico não existe.")
+            if i["id_medico"] == id_medico and (i["status"] == "Agendada" or i["status"] == "Confirmada"):
+                print(f"""
+                            Consultas 
+                            ---------
+                            ID da consulta: {i['id']}
+                            Paciente ID:    {i['id_paciente']}
+                            Médico ID:      {i['id_medico']}
+                            Data:           {i['data']}
+                            Hora:           {i['hora']}
+                            Status:         {i['status']}
+                            """)
+
+                existe = True
+    
+    if not existe:
+            print(f"Nao ha consultas no dia.")
 
 def Visualisar_agenda_diaria(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         data_hj = str(input("Qual a data que voce quer saber?, use como formato de exemplo isso (DD/MM/AAAA): "))
         for i in consultas:
@@ -29,7 +42,7 @@ def Visualisar_agenda_diaria(usuario):
         print("Você não é um médico cadastrado.")
 
 def Visualizar_agenda_futura(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     hoje = datetime.today()
     if id:
         for i in consultas:
@@ -39,7 +52,7 @@ def Visualizar_agenda_futura(usuario):
 
 #Atendimento
 def Iniciar_Atendimento(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         iniciar = input("Você quer iniciar o atendimento?(Responda sim ou não) ")
         if iniciar == "sim":
@@ -56,7 +69,7 @@ def Iniciar_Atendimento(usuario):
         print("Você não esta cadastrado.")
 
 def Finalizar_Atendimento(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         finalizar = input("Você quer finalizar o atendimento?(Responda sim ou não) ")
         if finalizar == "sim":
@@ -75,7 +88,7 @@ def Finalizar_Atendimento(usuario):
 
 #Prontuário/Laudo
 def Laudo_Medico(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         for i in consultas:
             if i["status"] == "Em Atendimento":
@@ -100,7 +113,7 @@ def Laudo_Medico(usuario):
 
 #Histórico Médico
 def buscar_paciente_por_nome(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         paciente = input("Qual o nome do paciente que você deseja saber as informações?")
         for i in pacientes:
@@ -114,7 +127,7 @@ def buscar_paciente_por_nome(usuario):
         print("Você não está cadastrado.")
 
 def Ver_historico_de_consultas_anteriores(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         paciente = input("Qual o nome do paciente que você deseja saber sobre o histórico de consultas? ")
         for i in pacientes:
@@ -127,7 +140,7 @@ def Ver_historico_de_consultas_anteriores(usuario):
         print("Você não está cadastrado.")
 
 def ver_prontuarios_anteriores_do_paciente(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         paciente = input("Qual o nome do paciente que você deseja saber sobre o histórico de seus prontuários? ")
         for i in pacientes:
@@ -143,7 +156,7 @@ def ver_prontuarios_anteriores_do_paciente(usuario):
 #Relatórios
 def Total_de_atendimentos(usuario):
     
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         for i in consultas:
             if i["id_medico"] == id and i["status"] == "Finalizada":
@@ -161,7 +174,7 @@ def Total_de_atendimentos(usuario):
         print("Você não está cadastrado.")
 
 def pacientes_atendidos_no_mes(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         mes_atual = date.today().month
         ano_atual = date.today().year
@@ -179,7 +192,7 @@ def pacientes_atendidos_no_mes(usuario):
         print("Você não está cadastrado.")
 
 def quantidade_de_consultas_pendentes(usuario):
-    id = main_medico(usuario)
+    id = f.retorna_id_medico(usuario)
     if id:
         for i in consultas:
             if i["id_medico"] == id and i["status"] == "Agendada" or i["status"] == "Confirmada":
@@ -196,4 +209,10 @@ def quantidade_de_consultas_pendentes(usuario):
     else:
         print("Você não está cadastrado.")
 
-
+def medico_open():
+    print("=====MEDICO=====")
+    print(f"Consultas hoje: {consultas_status("Agendada")}")
+    print(f"Pacientes cadastrado: {len(pacientes)}")
+    print(f"Médicos ativos: {len(medicos)}")
+    print(f"Atendimentos finalizados hoje: {consultas_status("Finalizada")}")
+    print(f"Consultas canceladas hoje: {consultas_status("Cancelada")}")
