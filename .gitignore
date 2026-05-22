@@ -1,3 +1,5 @@
 __pycache__/recepcionista.cpython-313.pyc
 *.pyc
 consultas.json
+__pycache__/funcoes.cpython-313.pyc
+__pycache__/admin.cpython-313.pyc
