@@ -52,65 +52,54 @@ def Visualizar_agenda_futura(usuario):
                 print(f"{i}")
 
 
-#Atendimento
+#Atendimento 
 def Iniciar_Atendimento(usuario):
     id = f.retorna_id_medico(usuario)
-    if id:
-        iniciar = input("Você quer iniciar o atendimento?(Responda sim ou não) ")
-        if iniciar == "sim":
-            for i in consultas:
-                if i["status"] == "Confirmada":
-                    i["status"] = "Em Atendimento"
-                    print("Você iniciou o atendimento.")
-        elif iniciar == "não":
-            print("Tranquilo então.")
-        else:
-            print("Essã opção não existe, digite sim ou não.")
-        f.salvar_json("consultas.json", consultas)
-    else:
-        print("Você não esta cadastrado.")
-
+    id_atendimento = int(input("Qual consulta deseja iniciar?\nID da consulta: "))
+    existe = False    
+    for i in consultas:
+        if (i["status"] == "Confirmada" or i["status"] == "Agendada") and i["id_medico"] == id and id_atendimento == i["id"]:
+            i["status"] = "Em Atendimento"
+            existe = True
+            print("Você iniciou o atendimento.")
+            f.salvar_json("consultas.json", consultas)
+    if not existe:
+        print("Consulta inexistente")
+    
 def Finalizar_Atendimento(usuario):
     id = f.retorna_id_medico(usuario)
-    if id:
-        finalizar = input("Você quer finalizar o atendimento?(Responda sim ou não) ")
-        if finalizar == "sim":
-            for i in consultas:
-                if i["status"] == "Em Atendimento":
-                    i["status"] == "Finalizada"
-                    print("Você finalizou o atendimento.")
-        elif finalizar == "não":
-            print("Tranquilo então.") 
-        else:
-            print("Essã opção não existe, digite sim ou não.")   
-        f.salvar_json("consultas.json", consultas) 
-    else:
-        print("Voce não esta cadastrado.")    
+    id_atendimento = int(input("Qual consulta deseja Finalizar?\nID da consulta: "))
+    existe = False    
+    for i in consultas:
+        if i["status"] == "Em Atendimento" and i["id_medico"] == id and id_atendimento == i["id"]:
+            i["status"] = "Finalizada"
+            existe = True
+            print("Atendimento Finalizado.")
+            f.salvar_json("consultas.json", consultas)
+    if not existe:
+        print("Consulta inexistente")
 
 
 #Prontuário/Laudo
 def Laudo_Medico(usuario):
     id = f.retorna_id_medico(usuario)
-    if id:
-        for i in consultas:
-            if i["status"] == "Em Atendimento":
-                nome_paciente = input("Qual o nome do paciente que necessita de um Laudo? ")
-                data = str(input("Quando o voce deseja fazer a consulta do Laudo? Use como exemplo esse: DD/MM/AAAA "))
-                medico_responsavel = input("Qual médico será resposável por fazer o Laudo? ")
-                Diagnostico = input("Qual o diagnóstico final do paciente? ")
-                receita = input("Qual a receita médica á ser passado? ")
-                observacoes = input("Quais são as observações que devem ser passadas ao paciente? ")
-                dic = {"id" : f.novo_id(prontuarios)
-                        ,"id_paciente" : f.id_paciente(pacientes,nome_paciente)
-                        , "id_medico" :f.id_paciente(medicos, medico_responsavel)
-                        , "data" : data
-                        , "diagnostico" : Diagnostico
-                        , "receita" : receita
-                        , "observacoes" : observacoes}
-                prontuarios.append(dic)
-        f.salvar_json("prontuarios.json", prontuarios)
-    else:
-        print("Você não é um médico cadastrado.")
+    id_consulta = input("Qual consulta deseja fazer o prontuário?\nid da consulta: ")
+    for i in consultas:
+        if i["status"] == "Em Atendimento" and i["id_medico"] == id and id_consulta == i["id"]:
+            data = str(date.today())
+            Diagnostico = input("Qual o diagnóstico final do paciente? ")
+            receita = input("Qual a receita médica á ser passado? ")
+            observacoes = input("Quais são as observações que devem ser passadas ao paciente? ")
+            novo_prontuario = {"id" : f.novo_id(prontuarios)
+                    ,"id_paciente" : i["id_paciente"]
+                    , "id_medico" : id
+                    , "data" : data
+                    , "diagnostico" : Diagnostico
+                    , "receita" : receita
+                    , "observacoes" : observacoes}
+            prontuarios.append(novo_prontuario)
+    f.salvar_json("prontuarios.json", prontuarios)
+
 
 
 #Histórico Médico

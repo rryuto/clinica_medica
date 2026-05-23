@@ -34,11 +34,12 @@ def id_existe(lista):
 
 def login(usuario, senha):
     usuarios_json = ler_json("usuarios.json")
-
     for i in usuarios_json:
         if i["usuario"].lower() == usuario.lower() and i["senha"] == senha:
             print("Login Realizado com sucesso\n")
             return i["nivel"]
+    return None    
+
 
 def buscar_id(lista, id):
     for i in lista:
@@ -126,6 +127,7 @@ def validar_data(data_str, hora_str):
         return False
 
 def medico_existe(id):
+    medicos = ler_json("medicos.json")
     for i in medicos:
         if i["id"] == id:
             return True

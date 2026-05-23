@@ -115,7 +115,7 @@
     "id": 15,
     "id_paciente": 4,
     "id_medico": 5,
-    "data": "10/05/2026",
+    "data": "25/05/2026",
     "hora": "09:30",
     "status": "Agendada"
   },
@@ -150,5 +150,13 @@
     "data": "10/05/2026",
     "hora": "22:32",
     "status": "Agendada"
+  },
+  {
+    "id": 20,
+    "id_paciente": 1,
+    "id_medico": 3,
+    "data": "22/05/2026",
+    "hora": "22:33",
+    "status": "Confirmada"
   }
 ]
